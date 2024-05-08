@@ -1,14 +1,18 @@
 import pandas as pd
-import numpy as np
+import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
-
+# Load crime data
 crime = pd.read_csv('/Users/angeneris/la_crime_data/la_crime_data-1/crime_data_2020_to_present.csv', parse_dates=['date_reported', 'crime_date'])
 
+# Data preprocessing
+crime['date_reported'] = pd.to_datetime(crime['date_reported'].str.split().str[0])
+crime['crime_date'] = pd.to_datetime(crime['crime_date'].str.split().str[0])
+crime = crime.sort_values(by='date_reported')
 
-# Display header and basic statistics
+# Display the data
 st.header('Crimes in Los Angeles between 2020 - Present', divider='blue')
 st.write('Visual Report by Angeneris Cifuentes')
 st.write(crime)
@@ -18,7 +22,7 @@ max_crime = crime['date_reported'].max()
 st.write(f'The latest crime reported occurred on: {max_crime}')
 
 # Group by year to see trends over time
-yearly_trends = crime.groupby('year').size().reset_index(name='total_crimes')
+yearly_trends = crime.groupby(crime['date_reported'].dt.year).size().reset_index(name='total_crimes')
 st.write(yearly_trends)
 
 # Filter records by neighborhood
