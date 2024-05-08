@@ -8,8 +8,8 @@ import plotly.express as px
 crime = pd.read_csv('/Users/angeneris/la_crime_data/la_crime_data-1/crime_data_2020_to_present.csv', parse_dates=['date_reported', 'crime_date'])
 
 # Data preprocessing
-crime['date_reported'] = pd.to_datetime(crime['date_reported'].str.split().str[0])
-crime['crime_date'] = pd.to_datetime(crime['crime_date'].str.split().str[0])
+crime['date_reported'] = pd.to_datetime(crime['date_reported'])
+crime['crime_date'] = pd.to_datetime(crime['crime_date'])
 crime = crime.sort_values(by='date_reported')
 
 # Display the data
