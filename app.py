@@ -5,7 +5,7 @@ import seaborn as sns
 import plotly.express as px
 
 # Load crime data
-crime = pd.read_csv('/Users/angeneris/la_crime_data/la_crime_data-1/crime_data_2020_to_present.csv', parse_dates=['date_reported', 'crime_date'])
+crime = pd.read_csv('crime_data_2020_to_present.csv', parse_dates=['date_reported', 'crime_date'])
 
 # Data preprocessing
 crime['date_reported'] = pd.to_datetime(crime['date_reported'])
