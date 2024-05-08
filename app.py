@@ -12,7 +12,12 @@ crime['date_reported'] = pd.to_datetime(crime['date_reported'])
 crime['crime_date'] = pd.to_datetime(crime['crime_date'])
 crime = crime.sort_values(by='date_reported')
 
+# Display the data
+st.header('Crimes in Los Angeles between 2020 - Present', divider='blue')
+st.write('Visual Report by Angeneris Cifuentes')
+
 # Create a break using Markdown syntax
+st.markdown('---')
 
 
 # Section 1 with emoji
