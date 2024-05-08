@@ -3,8 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
-import altair as alt
-import streamlit as st
 
 
 crime = pd.read_csv('/Users/angeneris/la_crime_data/la_crime_data-1/crime_data_2020_to_present.csv', parse_dates=['date_reported', 'crime_date'])
