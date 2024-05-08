@@ -21,8 +21,7 @@ st.write(crime)
 # Creates an update message
 max_crime = crime['date_reported'].max()
 
-
-# Displays the formatted date
+# Displays the message
 st.write(f'The latest crime reported occurred on: {max_crime}')
 
 
@@ -34,6 +33,30 @@ crime['day'] = crime['crime_date'].dt.day
 # Group by year to see trends over time
 yearly_trends = crime.groupby('year').size().reset_index(name='total_crimes')
 st.write(yearly_trends)
+
+
+# Group and count occurrences of each combination of year and status
+crime_data_grouped = crime_data.groupby(['year', 'status']).size().reset_index(name='count')
+
+# Sort the grouped data by 'year' and 'count' in descending order
+crime_data_grouped_sorted = crime_data_grouped.sort_values(by=['year', 'count'], ascending=[True, False])
+
+# Create scatterplot using Streamlit
+st.title('Count of Crimes by Year and Status')
+selected_status = st.multiselect('Select Status:', crime_data_grouped_sorted['status'].unique())
+
+filtered_data = crime_data_grouped_sorted[crime_data_grouped_sorted['status'].isin(selected_status)]
+
+fig, ax = plt.subplots(figsize=(12, 8))
+for status in selected_status:
+    data = filtered_data[filtered_data['status'] == status]
+    ax.scatter(data['year'], data['count'], label=status, alpha=0.8)
+
+ax.set_xlabel('Year')
+ax.set_ylabel('Count of Crimes')
+ax.legend()
+ax.grid(True)
+
 
 # Count the occurrence of each crime type 
 crime_counts = crime['crime_area'].value_counts()
