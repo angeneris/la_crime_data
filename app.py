@@ -13,7 +13,7 @@ crime['crime_date'] = pd.to_datetime(crime['crime_date'])
 crime = crime.sort_values(by='date_reported')
 
 # Displays the data
-st.header('Crimes in Los Angeles between 2020 - Present', divider='pink')
+st.header('Crimes in Los Angeles between 2020 - Present', divider='violet')
 st.write('Visual Report by Angeneris Cifuentes')
 
 # Creates a break using Markdown syntax with space
