@@ -20,8 +20,8 @@ st.write('Visual Report by Angeneris Cifuentes')
 st.markdown('---')
 
 
-# Section 1 with emoji
-st.header('Section 1 :rotating_light:')
+# Section 1
+st.header('Section 1')
 st.write(crime)
 
 # Show the latest reported crime date
