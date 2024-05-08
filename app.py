@@ -23,7 +23,17 @@ max_crime = crime['date_reported'].max()
 
 
 # Displays the formatted date
-st.write(f'The latest crime reported occurred on: {max_crime_formatted}')
+st.write(f'The latest crime reported occurred on: {max_crime}')
+
+
+# Extracts year, month, and date from the 'crime_date' column
+crime['year'] = crime['crime_date'].dt.year
+crime['month'] = crime['crime_date'].dt.month
+crime['day'] = crime['crime_date'].dt.day
+
+# Group by year to see trends over time
+yearly_trends = crime.groupby('year').size().reset_index(name='total_crimes')
+st.write(yearly_trends)
 
 # Count the occurrence of each crime type 
 crime_counts = crime['crime_area'].value_counts()
