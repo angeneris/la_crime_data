@@ -8,8 +8,6 @@ import plotly.express as px
 crime = pd.read_csv('crime_data_2020_to_present.csv', parse_dates=['date_reported', 'crime_date'], index_col=False)
 
 # Data preprocessing
-crime['date_reported'] = pd.to_datetime(crime['date_reported']).dt.date
-crime['crime_date'] = pd.to_datetime(crime['crime_date']).dt.date
 crime = crime.sort_values(by='date_reported')
 
 # Displays header and an introduction 
@@ -44,27 +42,51 @@ st.write(filtered_data)
 
 # New Section
 st.markdown("\n---")
+st.subheader('Yearly Crime Trends')
 
-# Group by year to see trends over time
-yearly_trends = crime.groupby(crime['date_reported']).size().reset_index(name='total_crimes')
-st.write(yearly_trends)
+# Data preprocessing for yearly trends 
+crime['year'] = crime['date_reported'].dt.year
 
-# Filter records by neighborhood
-st.subheader('Filter Crimes by Neighborhood')
-st.write('Use the search tool below to filter crimes by neighborhood.')
-neighborhood = st.text_input('Enter a neighborhood:', '')
-filtered_data = crime[crime['crime_area'].str.contains(neighborhood, case=False)]
-st.write(filtered_data)
+# Create a slider for selecting years
+start_year = crime['year'].min()
+end_year = crime['year'].max()
+selected_years = st.slider('Select a range of years:', start_year, end_year, (start_year, end_year))
 
-# Plot top 10 neighborhoods with reported crimes
-crime_counts = crime['crime_area'].value_counts()
-top_10 = plt.figure(figsize=(8, 6))
-sns.barplot(x=crime_counts.head(10).values, y=crime_counts.head(10).index)
-plt.xlabel('Number of Crimes Committed')
-plt.ylabel('Los Angeles Neighborhood')
-plt.title('Top 10 Neighborhoods with Crimes Reported in LA')
-st.pyplot(top_10)
+# Filter data based on selected years
+filtered_crime = crime[(crime['year'] >= selected_years[0]) & (crime['year'] <= selected_years[1])]
 
+# Group data by year and neighborhood
+yearly_neighborhood_crimes = filtered_crime.groupby(['year', 'crime_area']).size().reset_index(name='total_crimes')
+
+# Plot the data using Seaborn directly
+st.subheader('Yearly Crime Trends')
+fig = sns.lineplot(data=yearly_neighborhood_crimes, x='year', y='total_crimes', hue='crime_area')
+fig.figure.set_size_inches(10, 6)
+plt.title('Total Crimes per Year by Neighborhood')
+plt.xlabel('Year')
+plt.ylabel('Total Crimes')
+plt.xticks(rotation=45)
+plt.legend(title='Neighborhood', loc='upper left')
+st.pyplot(fig.figure)
+
+# Display the DataFrame
+st.write(yearly_neighborhood_crimes)
+
+# New Section
+st.markdown("\n---")
+st.subheader('Overall Crime Trends')
+
+st.subheader('Top 10 Neighborhoods with Reported Crimes')
+st.write('Below you can view a bar chart with the Top 10 Neighorhoods with reported crimes between the years 2020-2024')
+# Plots top 10 neighborhoods with reported crimes
+crime_counts = crime['crime_area'].value_counts().head(10)
+fig = px.bar(crime_counts, x=crime_counts.values, y=crime_counts.index, orientation='h',
+             labels={'y': 'Los Angeles Neighborhood', 'x': 'Number of Crimes Committed'},
+             title='Top 10 Neighborhoods with Crimes Reported in LA')
+st.plotly_chart(fig)
+
+
+#Write a blurb here about how most crimes are reported pretty quickly- and this would make sense since msot LA crimes are theft/theft of a vehichle or assualt
 # Show histogram of days between crimes and reporting
 reported_crime = crime[crime['days_between_report'] < 8]
 fig = px.histogram(reported_crime, x='days_between_report', title='Histogram of Days Between Crimes and Reporting of Crimes',
