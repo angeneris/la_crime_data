@@ -40,6 +40,7 @@ st.write(crime)
 # New Section
 st.markdown("\n---")
 st.subheader('Overall Crime Trends')
+st.write('Below you can view the total amount of crimes reported between in LA County between the years of 2020-2024. ')
 # Group data by year and calculate total crimes per year
 yearly_total_crimes = crime.groupby('year').size()
 
