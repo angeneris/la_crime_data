@@ -1,4 +1,4 @@
-import pandas as pd # type: ignore
+import pandas as pd 
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -16,17 +16,24 @@ crime = crime.sort_values(by='date_reported')
 st.header('Crimes in Los Angeles between 2020 - Present')
 st.write('Visual Report by Angeneris Cifuentes')
 
-# Header and summary for the dataframe
-st.header('Crime Reports in Los Angeles from 2020 - 2024')
+# New Section
+st.markdown("---")
+
+# Dataframe Header and summary for the dataframe
+st.subheader('Crime Reports in Los Angeles from 2020 - 2024')
 st.write('This data belongs to the public and is taken from the public LAPD database detailing crimes that have been reported between the years 2020-2024 in Los Angeles County')
 
 # Displays the dataframe, including a message with the most up-to-date crime reported
+st.write(crime)
 st.write('The latest reported crime in this dataset occurred on:', crime['date_reported'].max())
 
 # New Section
 st.markdown("---")
 
-# Creates a multiselect box for filtering the dataframe
+# Filtering data by any columns 
+st.subheader('Filter Dataframe by Any Column Grouping')
+st.write('Use the multiselect tool below to filter. Example: Select "Crime" and "Status". '
+         'Do you see any patterns between crime committed and the status of their investigation?')
 # Creates multiselect dropdowns for selecting columns
 selected_columns = st.multiselect('Select columns to display', crime.columns)
 # Filters the DataFrame based on selected columns
