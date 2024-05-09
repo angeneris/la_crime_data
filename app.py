@@ -11,6 +11,7 @@ crime = pd.read_csv('crime_data_2020_to_present.csv', parse_dates=['date_reporte
 crime['date_reported'] = pd.to_datetime(crime['date_reported']).dt.date
 crime['crime_date'] = pd.to_datetime(crime['crime_date']).dt.date
 crime = crime.sort_values(by='date_reported')
+crime = crime.sample(n=500, random_state=42)
 
 # Displays header and an introudction 
 st.header('Crimes in Los Angeles between 2020 - Present', divider='red')
