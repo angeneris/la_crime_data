@@ -5,7 +5,7 @@ import seaborn as sns
 import plotly.express as px
 
 # Load crime data
-crime = pd.read_csv('crime_data_2020_to_present.csv', parse_dates=['date_reported', 'crime_date'], index_col=False)
+crime = pd.read_csv('crime_data_2020_to_present.csv', parse_dates=['date_reported', 'crime_date'], index_col=False, nrows=50000)
 
 # Data preprocessing
 crime = crime.sort_values(by='date_reported')
@@ -71,6 +71,15 @@ st.write(yearly_neighborhood_crimes)
 # New Section
 st.markdown("\n---")
 st.subheader('Overall Crime Trends')
+
+# Creates a scatter plot
+scatter= px.scatter(filtered_crime, x='date_reported', y='crime', 
+                          title='Crime Scatter Plot: Crime and Report Date', 
+                          labels={'date_reported': 'Date Reported', 'crime': 'Crime Type'})
+
+# Display the scatter plot
+st.plotly_chart(scatter)
+
 
 st.subheader('Top 10 Neighborhoods with Reported Crimes')
 st.write('Below you can view a bar chart with the Top 10 Neighorhoods with reported crimes between the years 2020-2024')
