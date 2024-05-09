@@ -1,7 +1,7 @@
 [server]
 headless = true
-port = $PORT
+port = 10000
 
 [browser]
 serverAddress = "0.0.0.0"
-serverPort = $PORT
+serverPort = 10000
