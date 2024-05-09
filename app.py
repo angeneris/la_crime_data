@@ -22,8 +22,8 @@ st.subheader('Crime Reports in Los Angeles from 2020 - 2024')
 st.write('This data belongs to the public and is taken from the public LAPD database detailing crimes that have been reported between the years 2020-2024 in Los Angeles County')
 
 # Displays the dataframe, including a message with the most up-to-date crime reported
-st.write(crime)
 st.write('The latest reported crime in this dataset occurred on:', crime['date_reported'].max())
+st.write(crime)
 
 # New Section
 st.markdown("---")
@@ -58,16 +58,12 @@ filtered_crime = crime[(crime['year'] >= selected_years[0]) & (crime['year'] <= 
 # Group data by year and neighborhood
 yearly_neighborhood_crimes = filtered_crime.groupby(['year', 'crime_area']).size().reset_index(name='total_crimes')
 
-# Plot the data using Seaborn directly
-st.subheader('Yearly Crime Trends')
-fig = sns.lineplot(data=yearly_neighborhood_crimes, x='year', y='total_crimes', hue='crime_area')
-fig.figure.set_size_inches(10, 6)
-plt.title('Total Crimes per Year by Neighborhood')
-plt.xlabel('Year')
-plt.ylabel('Total Crimes')
-plt.xticks(rotation=45)
-plt.legend(title='Neighborhood', loc='upper left')
-st.pyplot(fig.figure)
+# Plot the data using Plotly Express
+st.subheader('Yearly Crime Trends by Neighborhood')
+fig = px.line(yearly_neighborhood_crimes, x='year', y='total_crimes', color='crime_area',
+              labels={'year': 'Year', 'total_crimes': 'Total Crimes', 'crime_area': 'Neighborhood'},
+              title='Total Crimes per Year by Neighborhood')
+st.plotly_chart(fig)
 
 # Display the DataFrame
 st.write(yearly_neighborhood_crimes)
