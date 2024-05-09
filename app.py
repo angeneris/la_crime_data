@@ -11,10 +11,9 @@ crime = pd.read_csv('crime_data_2020_to_present.csv', parse_dates=['date_reporte
 crime['date_reported'] = pd.to_datetime(crime['date_reported']).dt.date
 crime['crime_date'] = pd.to_datetime(crime['crime_date']).dt.date
 crime = crime.sort_values(by='date_reported')
-crime = crime.sample(n=500, random_state=42)
 
-# Displays header and an introudction 
-st.header('Crimes in Los Angeles between 2020 - Present', divider='red')
+# Displays header and an introduction 
+st.header('Crimes in Los Angeles between 2020 - Present')
 st.write('Visual Report by Angeneris Cifuentes')
 
 # Header and summary for the dataframe
@@ -22,23 +21,19 @@ st.header('Crime Reports in Los Angeles from 2020 - 2024')
 st.write('This data belongs to the public and is taken from the public LAPD database detailing crimes that have been reported between the years 2020-2024 in Los Angeles County')
 
 # Displays the dataframe, including a message with the most up-to-date crime reported
-st.dataframe(crime)
-max_crime = crime['date_reported'].max()
-st.write(f'The latest reported crime in this dataset occurred on: {max_crime}')
+st.write('The latest reported crime in this dataset occurred on:', crime['date_reported'].max())
 
 # New Section
-st.markdown("\n---")
+st.markdown("---")
 
-# Creates a multiselection box for filtering the dataframe
+# Creates a multiselect box for filtering the dataframe
 # Creates multiselect dropdowns for selecting columns
 selected_columns = st.multiselect('Select columns to display', crime.columns)
-
 # Filters the DataFrame based on selected columns
 filtered_data = crime[selected_columns]
 
 # Displays the filtered DataFrame
-st.dataframe(filtered_data, width=100)
-
+st.write(filtered_data)
 
 # New Section
 st.markdown("\n---")
