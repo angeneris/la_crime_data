@@ -1,7 +1,7 @@
 Triple Ten DS Sprint 4 Project: LA Crime Data from 2020 to 2024
 
 For this project, I obtained data from crimes based in Los Angeles, CA. 
-This data was obtained at: https://catalog.data.gov/dataset/crime-data-from-2020-to-present/resource/5eb6507e-fa82-4595-a604-023f8a326099 
+This data was obtained at: https://bit.ly/3JVTEhC
 
 Using a csv file containing a large data set of crimes between the years 2020 - early 2024, I have compiled a few key points that illustrate the themes found in the data.
 
