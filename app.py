@@ -12,19 +12,21 @@ crime['date_reported'] = pd.to_datetime(crime['date_reported']).dt.date
 crime['crime_date'] = pd.to_datetime(crime['crime_date']).dt.date
 crime = crime.sort_values(by='date_reported')
 
-# Displays the data
+# Displays header and an introudction 
 st.header('Crimes in Los Angeles between 2020 - Present', divider='red')
 st.write('Visual Report by Angeneris Cifuentes')
 
-# Creates a break with space
-st.markdown("\n---")
-
-
-# Section 1 of SDA
+# Header and summary for the dataframe
 st.header('Crime Reports in Los Angeles from 2020 - 2024')
-# Here you would write a summary of what the chart is 
+st.write('This data belongs to the public and is taken from the public LAPD database detailing crimes that have been reported between the years 2020-2024 in Los Angeles County')
 
+# Displays the dataframe, including a message with the most up-to-date crime reported
+st.dataframe(crime)
+max_crime = crime['date_reported'].max()
+st.write(f'The latest reported crime in this dataset occurred on: {max_crime}')
 
+# New Section
+st.markdown("\n---")
 
 # Creates a multiselection box for filtering the dataframe
 # Creates multiselect dropdowns for selecting columns
@@ -34,11 +36,10 @@ selected_columns = st.multiselect('Select columns to display', crime.columns)
 filtered_data = crime[selected_columns]
 
 # Displays the filtered DataFrame
-st.write(filtered_data)
+st.dataframe(filtered_data, width=100)
 
-# Show the latest reported crime date
-max_crime = crime['date_reported'].max()
-st.write(f'The latest reported crime in this dataset occurred on: {max_crime}')
+
+# New Section
 st.markdown("\n---")
 
 # Group by year to see trends over time
@@ -46,6 +47,8 @@ yearly_trends = crime.groupby(crime['date_reported']).size().reset_index(name='t
 st.write(yearly_trends)
 
 # Filter records by neighborhood
+st.subheader('Filter Crimes by Neighborhood')
+st.write('Use the search tool below to filter crimes by neighborhood.')
 neighborhood = st.text_input('Enter a neighborhood:', '')
 filtered_data = crime[crime['crime_area'].str.contains(neighborhood, case=False)]
 st.write(filtered_data)
