@@ -1,12 +1,14 @@
 ## **Los Angeles Crime Data Analysis**
 
+You can view the live app including overall and yearly crime trends at: https://la-crime-data.onrender.com
+
 This repository contains code for analyzing crime data from Los Angeles, CA, spanning the years 2020 to the present. The main focus of this project is to explore and visualize various aspects of crime trends in the region.
 
 This is a very large data set, containing almost 100k rows of data, spanning the last 4 years.
 The full dataframe has been uploaded to this repository using git-lfs. 
 A sample of 50,000 was used for analysis purpose of this data. 
 
-You can view the live app including overall and yearly crime trends at: https://la-crime-data.onrender.com
+
 
 
 
@@ -15,7 +17,7 @@ You can view the live app including overall and yearly crime trends at: https://
 The project utilizes libraries such as Pandas, Matplotlib, Seaborn, and Plotly Express for data manipulation and visualization. The Streamlit framework is used to create an interactive web application that allows users to explore the crime data and visualize trends through interactive charts and graphs.
 <br>
 
-How to Run the App: 
+#### How to Run the App: 
 
 1. Clone the repository to your local machine.
 2. Install the required dependencies by running pip install -r requirements.txt.
@@ -26,6 +28,7 @@ Feel free to modify the code or extend the functionality of the application to s
 <br>
 
 
+#### **Files**
 **Notebooks:** In addition to the app.py file, the repository also contains Jupyter notebooks (*.ipynb) that provide additional insights and analysis of the crime data. These notebooks can be found in the notebooks directory.
 
 
@@ -37,7 +40,6 @@ Other Files:
 .gitignore: Specifies files and directories to be ignored by Git.
 .streamlit: Directory containing Streamlit configuration files.
 requirements.txt: Text file listing the required Python packages and their versions.
-
 
 
 **Resources/ References:**
