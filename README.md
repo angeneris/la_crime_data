@@ -1,4 +1,4 @@
-**Los Angeles Crime Data Analysis**
+## **Los Angeles Crime Data Analysis**
 
 This repository contains code for analyzing crime data from Los Angeles, CA, spanning the years 2020 to the present. The main focus of this project is to explore and visualize various aspects of crime trends in the region.
 
