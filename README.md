@@ -22,6 +22,7 @@ How to Run the App:
 
 Feel free to modify the code or extend the functionality of the application to suit your specific needs or interests. The project serves as a demonstration of using Streamlit for building interactive data analysis applications.
 <br>
+
 **Notebooks:** In addition to the app.py file, the repository also contains Jupyter notebooks (*.ipynb) that provide additional insights and analysis of the crime data. These notebooks can be found in the notebooks directory.
 
 **Dataset:** The repository includes a large CSV file uploaded using Git Large File Storage (Git LFS). If you plan to replicate this project, I reccomend you use a smaller dataset or a sample of this data saved as a new csv. Otherwise, you can follow instructions online to download and use LFS. 
