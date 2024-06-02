@@ -1,6 +1,6 @@
 ## **Los Angeles Crime Data Analysis**
 
-You can view the live app including overall and yearly crime trends at: https://la-crime-data.onrender.com
+You can view the live app including overall and yearly crime trends at: https://la-crime-data.onrender.com (This page uses a free subscription for deployment so it may take 50 seconds or more to load)
 
 This repository contains code for analyzing crime data from Los Angeles, CA, spanning the years 2020 to the present. The main focus of this project is to explore and visualize various aspects of crime trends in the region.
 
